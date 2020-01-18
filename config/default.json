@@ -1,0 +1,14 @@
+{
+  "db": {
+    "database": "qraphql_server_database",
+    "username": "postgres",
+    "userpass": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres", 
+    "logging": false
+  },
+  "server-config": {
+    "port": 4000
+  }
+}
