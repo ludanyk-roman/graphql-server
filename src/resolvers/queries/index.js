@@ -1,11 +1,5 @@
 module.exports = {
-  city: async (_, { where }, { db: { city } }) => city.findAll({ where }),
-  place: async (_, { where }, { db: { place } }) => {
-    const places = await place.findAll({ where });
-    return places;
-  },
-  comment: async (_, { where }, { db: { comment } }) => {
-    const comments = await comment.findAll({ where });
-    return comments;
-  },
+  city: async (_, { where }, { db: { city, place } }) =>  city.findAll({ where, include: place }),
+  place: async (_, { where }, { db: { place, comment } }) => place.findAll({ where, include: comment }),
+  comment: async (_, { where }, { db: { comment, place } }) => comment.findAll({ where }),
 };

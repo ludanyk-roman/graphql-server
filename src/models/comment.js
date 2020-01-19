@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = place => ({
+module.exports = {
   id: {
     type: Sequelize.BIGINT,
     primaryKey: true,
@@ -12,11 +12,4 @@ module.exports = place => ({
   userName: {
     type: Sequelize.STRING,
   },
-  placeId: {
-    type: Sequelize.BIGINT,
-    references: {
-      model: place,
-      key: 'id',
-    },
-  },
-});
+};

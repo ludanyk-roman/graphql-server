@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = city => ({
+module.exports = {
   id: {
     type: Sequelize.BIGINT,
     primaryKey: true,
@@ -18,11 +18,4 @@ module.exports = city => ({
   imageUrl: {
     type: Sequelize.STRING,
   },
-  cityId: {
-    type: Sequelize.BIGINT,
-    references: {
-      model: city,
-      key: 'id',
-    },
-  },
-});
+};

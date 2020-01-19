@@ -1,30 +1,21 @@
 type Query {
-  city(where: CommonWhere): [City]!
-  place(where: CommonWhere): [Place]!
-  comment(where: CommentWhere): [Comment]!
+  city(where: CommonInputWhere): [City]!
+  place(where: CommonInputWhere): [Place]!
+  comment(where: CommonInputWhere): [Comment]!
 }
 
 type Mutation {
-  insertCity(set: CityInput!): City
-  updateCity(set: CityInput!, where: IdInput!): City
-  deleteCity(where: IdInput!): City
+  insertCity(set: CityInput!): CityWithoutPlaces
+  updateCity(set: CityInput!, where: IdInput!): CityWithoutPlaces
+  deleteCity(where: IdInput!): CityWithoutPlaces
 
-  insertPlace(set: PlaceInput!): Place
-  updatePlace(set: PlaceInput!, where: IdInput!): Place
-  deletePlace(where: IdInput!): Place
+  insertPlace(set: PlaceInput!): PlaceWithoutComments
+  updatePlace(set: PlaceInput!, where: IdInput!): PlaceWithoutComments
+  deletePlace(where: IdInput!): PlaceWithoutComments
 
   insertComment(set: CommentInput!): Comment
   updateComment(set: CommentInput!, where: IdInput!): Comment
   deleteComment(where: IdInput!): Comment
-}
-
-input IdInput {
-  id: Int
-}
-
-input CommonWhere {
-  id: Int
-  name: String
 }
 
 type City {
@@ -34,6 +25,48 @@ type City {
   description: String
   population: Int
   imageUrl: String
+  places: [PlaceWithoutComments]!
+}
+
+type CityWithoutPlaces {
+  id: Int
+  name: String
+  location: String
+  description: String
+  population: Int
+  imageUrl: String
+}
+
+type Place {
+  id: Int
+  name: String
+  location: String
+  description: String
+  imageUrl: String
+  comments: [Comment]!
+}
+
+type PlaceWithoutComments {
+  id: Int
+  name: String
+  location: String
+  description: String
+  imageUrl: String
+}
+
+type Comment {
+  id: Int
+  content: String
+  userName: String
+}
+
+input IdInput {
+  id: Int
+}
+
+input CommonInputWhere {
+  id: Int
+  name: String
 }
 
 input CityInput {
@@ -44,26 +77,12 @@ input CityInput {
   population: Int
 }
 
-type Place {
-  id: Int
-  name: String
-  location: String
-  description: String
-  imageUrl: String
-}
-
 input PlaceInput {
   name: String
   location: String
   description: String
   imageUrl: String
   cityId: Int
-}
-
-type Comment {
-  id: Int
-  content: String
-  userName: String
 }
 
 input CommentInput {
